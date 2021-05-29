@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+require "vendor/autoload.php";
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,7 +42,8 @@
   </head>
   <body>
     
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Event</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,12 +54,26 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="main.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">Register</a>
-        </li>
+
+<?php 
+
+if ( !isset( $_SESSION["name"] ) ) {
+  echo '
+    <li class="nav-item">
+      <a class="nav-link" href="login.php">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="register.php">Register</a>
+    </li>
+  ';
+} else {
+  echo '
+    <li class="nav-item">
+      <a class="nav-link" href="user.php">' . $_SESSION["name"] . '</a>
+    </li>
+  ';
+}
+?>
       </ul>
     </div>
   </div>

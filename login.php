@@ -43,8 +43,8 @@
       foreach( $results['Items'] as $item ) {
         $usernameItem = $marshaler->unmarshalValue($item['username']);
         $passwordItem = $marshaler->unmarshalValue($item['password']);
-        if ( $username == $usernameItem  and $password == $passwordItem) {
-          $_SESSION["name"] = $marshaler->unmarshalValue($item['user_name']);
+        if ( $username == $usernameItem && $password == $passwordItem) {
+          $_SESSION["name"] = $marshaler->unmarshalValue($item['name']);
           header("Location: main.php");
         }
       }
