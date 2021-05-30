@@ -5,7 +5,7 @@ const Nav = () => {
     <>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="./">
             Event
           </a>
           <button
@@ -42,7 +42,9 @@ const Nav = () => {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./user.html"></a>
+                <a class="nav-link" href="./user.html">
+                  User
+                </a>
               </li>
             </ul>
           </div>
