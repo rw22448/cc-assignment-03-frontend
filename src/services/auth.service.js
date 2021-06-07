@@ -80,6 +80,17 @@ class AuthService {
       headers: authHeader()
     })
   }
+
+  createImage(imageInput) {
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    return axios.post(API_URL + 'users/images/create-image', {
+      username: user.username,
+      image: imageInput
+    }, {
+      headers: authHeader()
+    })
+  }
 }
 
 export default new AuthService();
