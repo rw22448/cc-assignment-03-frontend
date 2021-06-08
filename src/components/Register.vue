@@ -91,13 +91,13 @@ export default {
         }
       );
     },
-    createB64Image(image) {
-      const reader = new FileReader();
-      reader.onload = (read) => {
-        this.image = e.target.result;
-      };
-      reader.readAsBinaryString(image);
-    },
+    // createB64Image(image) {
+    //   const reader = new FileReader();
+    //   reader.onload = (read) => {
+    //     this.image = e.target.result;
+    //   };
+    //   reader.readAsBinaryString(image);
+    // },
   },
 };
 </script>

@@ -87,8 +87,7 @@ export default {
     },
   },
   mounted() {
-    let user = JSON.parse(localStorage.getItem('user'));
-    UserService.getAllEventByCreator(user.username).then(
+    UserService.getAllEventByCreator(this.$store.state.auth.user.username).then(
       (response) => {
         this.events = response.data.events;
       },
