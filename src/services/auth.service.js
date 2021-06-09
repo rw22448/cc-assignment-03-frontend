@@ -70,12 +70,19 @@ class AuthService {
     })
   }
 
-  joinEvent(id) {
-    let user = JSON.parse(localStorage.getItem('user'));
-
+  joinEvent(input) {
     return axios.put(API_URL + 'events/add-attendees', {
-      eventId: id,
-      username: user.username
+      id: input,
+      attendees: this.$store.state.auth.user.username
+    }, {
+      headers: authHeader()
+    })
+  }
+
+  leaveEvent(input) {
+    return axios.put(API_URL + 'events/remove-attendees', {
+      id: input,
+      attendees: this.$store.state.auth.user.username
     }, {
       headers: authHeader()
     })

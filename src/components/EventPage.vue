@@ -86,7 +86,15 @@ export default {
       this.$router.push({ name: "editEvent", params: { id: id } });
     },
   },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
   mounted() {
+    if (!this.currentUser) {
+      this.$router.push("/login");
+    }
     UserService.getAllEventByCreator(this.$store.state.auth.user.username).then(
       (response) => {
         this.events = response.data.events;

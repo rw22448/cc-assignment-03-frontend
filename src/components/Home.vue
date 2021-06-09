@@ -23,6 +23,12 @@
         >
           Attend
         </button>
+        <button
+          @click="handleLeaveEvent(event.id)"
+          class="btn btn-outline-danger btn-sm"
+        >
+          Leave
+        </button>
       </p>
     </div>
   </div>
@@ -38,6 +44,7 @@ export default {
     return {
       title: "Public Listing Events",
       events: [],
+      eventJoin: [],
     };
   },
   methods: {
@@ -49,7 +56,23 @@ export default {
       } else {
         this.$store.dispatch("auth/joinEvent", id).then(
           () => {
-            // xxx
+            //
+          },
+          (error) => {
+            this.message = error.response.data.error;
+          }
+        );
+      }
+    },
+    handleLeaveEvent(id) {
+      console.log(id);
+
+      if (!this.loggedIn) {
+        this.$router.push("/login");
+      } else {
+        this.$store.dispatch("auth/leaveEvent", id).then(
+          () => {
+            //
           },
           (error) => {
             this.message = error.response.data.error;
