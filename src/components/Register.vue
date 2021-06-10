@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import { Form, Field } from "vee-validate";
+import { Form, Field } from 'vee-validate';
 
 export default {
-  name: "Register",
+  name: 'Register',
   components: {
     Form,
     Field,
@@ -57,7 +57,7 @@ export default {
     return {
       successful: false,
       loading: false,
-      message: "",
+      message: '',
       image: '',
     };
   },
@@ -68,20 +68,20 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push('/profile');
     }
   },
   methods: {
     handleRegister(user) {
-      this.message = "";
+      this.message = '';
       this.successful = false;
       this.loading = true;
       this.image = user.image;
 
-      this.$store.dispatch("auth/register", user).then(
+      this.$store.dispatch('auth/register', user).then(
         (data) => {
           this.message =
-            "Congratulation " + data.username + ", success register.";
+            'Congratulation ' + data.username + ', success register.';
           this.successful = true;
           this.loading = false;
         },
