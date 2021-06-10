@@ -84,11 +84,6 @@ export default {
             "Congratulation " + data.username + ", success register.";
           this.successful = true;
           this.loading = false;
-          this.$store.dispatch("auth/createImage", this.createB64Image(data.image)).then(
-            () => {
-              //
-            }
-          )
         },
         (error) => {
           this.message = error.response.data.error;
