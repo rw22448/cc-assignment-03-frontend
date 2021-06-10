@@ -12,10 +12,10 @@
             <label for="password">Password</label>
             <Field name="password" type="password" class="form-control" />
           </div>
-          <!-- <div class="form-group">
-            <label for="image">Profile Picture</label>
-            <Field name="image" type="file" class="form-control" accept="image/*">
-          </div> -->
+          <div class="form-group">
+            <label for="image">Profile Picture (.jpg) (less than 2MB)</label>
+            <Field name="image" type="file" class="form-control" accept="image/jpeg" />
+          </div>
 
           <div class="form-group">
             <button class="btn btn-success btn-block" :disabled="loading">
@@ -91,13 +91,6 @@ export default {
         }
       );
     },
-    // createB64Image(image) {
-    //   const reader = new FileReader();
-    //   reader.onload = (read) => {
-    //     this.image = e.target.result;
-    //   };
-    //   reader.readAsBinaryString(image);
-    // },
   },
 };
 </script>

@@ -30,8 +30,12 @@
           Leave
         </button>
       </p>
+      <div :key="eventJoinMessage">
+  {{ eventJoinMessage }}
+  </div>
     </div>
   </div>
+  
   </div>
 </template>
 
@@ -44,42 +48,8 @@ export default {
     return {
       title: "Public Listing Events",
       events: [],
-      eventJoin: [],
+      eventJoinMessage: ""
     };
-  },
-  methods: {
-    handleJoinEvent(id) {
-      console.log(id);
-
-      if (!this.loggedIn) {
-        this.$router.push("/login");
-      } else {
-        this.$store.dispatch("auth/joinEvent", id).then(
-          () => {
-            //
-          },
-          (error) => {
-            this.message = error.response.data.error;
-          }
-        );
-      }
-    },
-    handleLeaveEvent(id) {
-      console.log(id);
-
-      if (!this.loggedIn) {
-        this.$router.push("/login");
-      } else {
-        this.$store.dispatch("auth/leaveEvent", id).then(
-          () => {
-            //
-          },
-          (error) => {
-            this.message = error.response.data.error;
-          }
-        );
-      }
-    },
   },
   mounted() {
     UserService.getAllEvent().then(
@@ -94,6 +64,43 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  methods: {
+    handleJoinEvent(id) {
+      const username = JSON.parse(localStorage.getItem('user')).username
+
+      if (!this.loggedIn) {
+        this.$router.push("/login");
+      } else {
+        this.$store.dispatch("auth/join", { 'id': id, 'username': username }).then(
+        (data) => {
+        this.eventJoinMessage = "Successfully joined event " + id;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+      }
+    },
+    handleLeaveEvent(id) {
+      const username = JSON.parse(localStorage.getItem('user')).username
+
+      if (!this.loggedIn) {
+        this.$router.push("/login");
+      } else {
+        this.$store.dispatch("auth/leave", { 'id': id, 'username': username }).then(
+          (data) => {
+            this.eventJoinMessage = "Successfully left event " + id;
+            console.log(data);
+          },
+          (error) => {
+            this.message = error.response.data.error;
+          }
+        );
+      }
     },
   },
 };
