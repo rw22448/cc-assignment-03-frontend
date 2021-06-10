@@ -14,7 +14,7 @@
           </div>
           <div class="form-group">
             <label for="image">Profile Picture (.jpg) (less than 2MB)</label>
-            <Field name="image" type="file" class="form-control" accept="image/jpeg" />
+            <Field name="image" type="file" class="form-control" accept="image/*" />
           </div>
 
           <div class="form-group">
