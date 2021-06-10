@@ -24,7 +24,45 @@ class AuthService {
     localStorage.removeItem('user');
   }
 
+  join({ id, username }) {
+    var attendeesArray = [];
+    attendeesArray.push(username)
+
+    return axios.put(API_URL + 'events/add-attendees', {
+      id: id,
+      attendees: attendeesArray
+    }, {
+      headers: authHeader()
+    })
+  }
+
+  leave({ id, username }) {
+    var attendeesArray = [];
+    attendeesArray.push(username)
+
+    return axios.put(API_URL + 'events/remove-attendees', {
+      id: id,
+      attendees: attendeesArray
+    }, {
+      headers: authHeader()
+    })
+  }
+
   register(user) {
+    console.log(user.image[0])
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      console.log(reader.result)
+
+      axios.put(API_URL + 'users/images/create-image', {
+        username: user.username,
+        image: reader.result
+      }).then((response) => {
+        console.log(response)
+      }).catch((error) => {console.log(error)})
+    }
+    reader.readAsDataURL(user.image[0])
     return axios.post(API_URL + 'users/create-user', {
       username: user.username,
       password: user.password
@@ -65,24 +103,6 @@ class AuthService {
       startTime: event.startTime,
       endTime: event.endTime,
       location: event.location
-    }, {
-      headers: authHeader()
-    })
-  }
-
-  joinEvent(input) {
-    return axios.put(API_URL + 'events/add-attendees', {
-      id: input,
-      attendees: this.$store.state.auth.user.username
-    }, {
-      headers: authHeader()
-    })
-  }
-
-  leaveEvent(input) {
-    return axios.put(API_URL + 'events/remove-attendees', {
-      id: input,
-      attendees: this.$store.state.auth.user.username
     }, {
       headers: authHeader()
     })

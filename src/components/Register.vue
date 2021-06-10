@@ -13,8 +13,8 @@
             <Field name="password" type="password" class="form-control" />
           </div>
           <div class="form-group">
-            <label for="image">Profile Picture</label>
-            <Field name="image" type="file" class="form-control" accept="image/*" />
+            <label for="image">Profile Picture (.jpg) (less than 2MB)</label>
+            <Field name="image" type="file" class="form-control" accept="image/jpeg" />
           </div>
 
           <div class="form-group">
@@ -96,13 +96,6 @@ export default {
           this.loading = false;
         }
       );
-    },
-    createB64Image(image) {
-      const reader = new FileReader();
-      reader.onload = (read) => {
-        this.image = read.target.result;
-      };
-      reader.readAsBinaryString(image);
     },
   },
 };

@@ -4,7 +4,7 @@
       <h3>
         <img
           id="profile-img"
-          src="https://cc-03-user-images-bucket-dev.s3.amazonaws.com/{{ currentUser.username }}"
+          :src="imageUrl"
           class="profile-img-card"
         />
         <strong>{{ currentUser.username }}</strong> Profile
@@ -24,6 +24,9 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     },
+    imageUrl() {
+      return 'https://cc-03-user-images-bucket-dev.s3.amazonaws.com/' + this.currentUser.username
+    }
   },
   mounted() {
     if (!this.currentUser) {
