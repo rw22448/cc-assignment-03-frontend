@@ -4,7 +4,7 @@
       <h3>
         <img
           id="profile-img"
-          src="https://picsum.photos/200"
+          src="https://cc-03-user-images-bucket-dev.s3.amazonaws.com/{{ currentUser.username }}"
           class="profile-img-card"
         />
         <strong>{{ currentUser.username }}</strong> Profile

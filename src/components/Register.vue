@@ -12,10 +12,10 @@
             <label for="password">Password</label>
             <Field name="password" type="password" class="form-control" />
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="image">Profile Picture</label>
-            <Field name="image" type="file" class="form-control" accept="image/*">
-          </div> -->
+            <Field name="image" type="file" class="form-control" accept="image/*" />
+          </div>
 
           <div class="form-group">
             <button class="btn btn-success btn-block" :disabled="loading">
@@ -76,6 +76,7 @@ export default {
       this.message = "";
       this.successful = false;
       this.loading = true;
+      this.image = user.image;
 
       this.$store.dispatch("auth/register", user).then(
         (data) => {
@@ -83,6 +84,11 @@ export default {
             "Congratulation " + data.username + ", success register.";
           this.successful = true;
           this.loading = false;
+          this.$store.dispatch("auth/createImage", this.createB64Image(data.image)).then(
+            () => {
+              //
+            }
+          )
         },
         (error) => {
           this.message = error.response.data.error;
@@ -91,13 +97,13 @@ export default {
         }
       );
     },
-    // createB64Image(image) {
-    //   const reader = new FileReader();
-    //   reader.onload = (read) => {
-    //     this.image = e.target.result;
-    //   };
-    //   reader.readAsBinaryString(image);
-    // },
+    createB64Image(image) {
+      const reader = new FileReader();
+      reader.onload = (read) => {
+        this.image = read.target.result;
+      };
+      reader.readAsBinaryString(image);
+    },
   },
 };
 </script>
